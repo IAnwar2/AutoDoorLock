@@ -5,9 +5,19 @@ void setup() {
 void loop() {
   // Do whatever you want with the received data
   if (Serial.available() > 0) {
-    char data = Serial.read();
+    string data = Serial.read();
+
     // Process the received data
     Serial.print("Arduino received: ");
     Serial.println(data);
+
+    if (data == "unlock"){
+      Serial.println("Doors are unlocking");
+
+    } else if (data == "lock"){
+      Serial.println("Doors are locking");
+
+
+    } 
   }
 }
