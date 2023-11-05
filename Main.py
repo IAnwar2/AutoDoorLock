@@ -78,7 +78,6 @@ def capture_and_save_image(name, path):
 
 def Startup():
     global quitInStartup
-    #global loggedInUser
 
     choice = simpledialog.askstring("Input", "Log in or create new account or quit (l/c/q):")
 
