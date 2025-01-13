@@ -9,9 +9,8 @@ masterPassword = "1"
 skipStartup = False
 quitInStartup = False
 
-
-credentials_file_path = 'credentials.txt'
-
+# Construct the credentials file path in a cross-platform way
+credentials_file_path = os.path.join(os.path.dirname(__file__), 'credentials.txt')
 
 # Make sure folder will exist
 if not os.path.exists(fr.main_folder_path):
@@ -63,10 +62,36 @@ def capture_and_save_image(name, path):
     # Open the webcam
     cap = cv2.VideoCapture(0)
 
+    # if cap.isOpened():
+    #     print("Webcam is available.")
+    # else:
+    #     print("No webcam found.")
+
     # Capture a single frame
-    ret, frame = cap.read()
+    # ret, frame = cap.read()
+
+    face_locations = False
+
+    while not face_locations:
+        # Capture a frame from the webcam
+        ret, frame = cap.read()
+        
+        if not ret:
+            print("Failed to capture frame.")
+            break
+
+        # Convert the frame from BGR (OpenCV) to RGB (face_recognition uses RGB)
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        # Detect face locations in the frame
+        face_locations = fr.face_recognition.face_locations(rgb_frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cap.release()
+            return
 
     imgNum = str(count_files_in_folder(path) + 1)
+
 
     # Save the captured frame to a specific folder with the user's name
     image_path = f'{path}/{name}-{imgNum}.jpg'

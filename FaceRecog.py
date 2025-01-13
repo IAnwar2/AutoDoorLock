@@ -20,10 +20,10 @@ def startRecognition():
     #make array of sample pictures with encodings
     known_face_encodings = []
     dirname = os.path.dirname(__file__)
-    path = os.path.join(dirname, f'{main_folder_path}\\{loggedInUser}\\')
+    path = os.path.join(dirname, main_folder_path, loggedInUser)
 
     #make an array of all the saved jpg files' paths
-    list_of_files = [f for f in glob.glob(path+'*.jpg')]
+    list_of_files = glob.glob(os.path.join(path, '*.jpg'))
     #find number of known faces
     number_files = len(list_of_files)
 
@@ -61,12 +61,12 @@ def startRecognition():
 
                 # Or instead, use the known face with the smallest distance to the new face
                 face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
-                best_match_index = np.argmin(face_distances)
-                if matches[best_match_index]:
-                    name = loggedInUser
-                    if unlocked == False:
-                        sc.SendInfo("unlocked") # unlock the safe if face is found 
-                        unlocked = True
+                if len(face_distances) > 0:
+                    best_match_index = np.argmin(face_distances)
+                    if matches[best_match_index]:
+                        name = loggedInUser
+                        if unlocked == False:
+                            unlocked = True
 
                 face_names.append(name)
 
@@ -94,7 +94,6 @@ def startRecognition():
 
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
-            sc.SendInfo("lock") # lock the safe if face recog is finished
             break
 
     # Release handle to the webcam
