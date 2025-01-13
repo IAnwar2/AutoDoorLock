@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import os
 import glob
-import SerialCom as sc
 
 
 main_folder_path = 'FacePics'
