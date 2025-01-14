@@ -1,6 +1,6 @@
 /FacePics/
-**/__pycache__/
-
+__pycache__/
+/DoorLockEnv/
 *.log
-
 credentials.txt
+.DS_Store

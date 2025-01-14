@@ -49,6 +49,9 @@ def startRecognition():
 
         # Only process every other frame of video to save time
         if process_this_frame:
+
+            # Check Face Recognition
+
             # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(small_frame)
             face_encodings = face_recognition.face_encodings(small_frame, face_locations)
@@ -69,6 +72,11 @@ def startRecognition():
                             unlocked = True
 
                 face_names.append(name)
+            
+
+            # Check for guestures
+
+            
 
         process_this_frame = not process_this_frame
 
