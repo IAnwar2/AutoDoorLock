@@ -80,7 +80,6 @@ def capture_and_save_image(name, path):
             print("Failed to capture frame.")
             break
 
-        # Convert the frame from BGR (OpenCV) to RGB (face_recognition uses RGB)
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # Detect face locations in the frame
@@ -97,7 +96,6 @@ def capture_and_save_image(name, path):
     image_path = f'{path}/{name}-{imgNum}.jpg'
     cv2.imwrite(image_path, frame)
 
-    # Release the webcam
     cap.release()
 
 
@@ -152,7 +150,6 @@ def main():
     global skipStartup
     global quitInStartup
 
-    # Initialize the variables
     skipStartup = False
     quitInStartup = False
 
