@@ -1,9 +1,11 @@
 import face_recognition
+import import_ipynb
 import cv2
 import numpy as np
 import os
 import glob
 from tensorflow.keras.models import load_model
+from HandModel.HandGesture import FCNN
 import mediapipe as mp
 import time
 
@@ -105,7 +107,7 @@ def startRecognition():
                         input_features = input_features.reshape(1, -1)
 
                         # Predict the gesture
-                        prediction = model.predict(input_features)
+                        prediction = model(input_features)
                         predicted_class = np.argmax(prediction) 
                         confidence = np.max(prediction)
 

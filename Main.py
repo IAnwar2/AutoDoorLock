@@ -22,12 +22,10 @@ if not os.path.exists(credentials_file_path):
     with open(credentials_file_path, 'w'):
         pass 
 
-
 def write_credentials_to_file(username, password):
     # Open the file in 'a' mode (append) to add new credentials without overwriting existing content
     with open(credentials_file_path, 'a') as file:
         file.write(f'{username}:{password}\n')
-
 
 def find_credentials_in_file(username, password):
 

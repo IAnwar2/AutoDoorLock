@@ -1,6 +1,7 @@
 /FacePics/
 __pycache__/
 /DoorLockEnv/
+/HandModel/
 *.log
 credentials.txt
 .DS_Store
